@@ -1,0 +1,27 @@
+<form method="post" action="file:///C:/Users/Achille/Documents/COURS/ING%203/WEBB/Projet%20Partage%20Photo/Accueil.html">
+   <p>
+       <label for="pseudo">Nom d'utilisateur :</label>
+       <input type="text" name="pseudo" id="pseudo" />
+       
+       <br />
+       <label for="pass">Mot de passe :</label>
+       <input type="password" name="pass" id="pass" />
+       <br />
+       <input type="submit" value="Se Connecter" ></code>
+      <br />
+      <br />
+
+       <h2>Nouvel Utilisateur</h2>
+       <label for="pseudo">Nom d'utilisateur :</label>
+       <input type="text" name="pseudo" id="pseudo" />
+       
+       <br />
+       <label for="pass">Mot de passe :</label>
+       <input type="password" name="pass" id="pass" />
+       <br />
+        <label for="pass2">Confirmer le mot de passe :</label>
+       <input type="password" name="pass2" id="pass" />
+       <br />
+       <input type="submit" value="Se Connecter" ></code>
+   </p>
+   </form>
