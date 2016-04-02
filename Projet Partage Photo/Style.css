@@ -5,7 +5,7 @@ body
     text-align: center ;
     font: 0.8em "Trebuchet MS", helvetica, sans-serif ;
     background: #dea ;
-    background-color: rgb(150,10,10);
+    background-color: rgb(150,90,90);
 }
 div#conteneur
 {
@@ -18,21 +18,34 @@ div#conteneur
 }
 h1#header
 {
-    height: 140;
+    height: 120;
     background: url(logoAccueil.jpg) no-repeat left top;
     margin: 0;
 }
 h1#header a
 {
-    width: 500 ;
-    height: 70px ;
+    width: 600 ;
+    height: 0px ;
     display: block ;
-    background: url(title.jpg) no-repeat ;
+    
     position: relative ;
-    left: 470px ;
-    top: 15px ;
-    text-indent: -5000px ;
-}
+    left: 200px ;
+  
+      font-size: 60px;
+  text-shadow: -2px -2px #f00, 2px 2px #a00, -3px 0 4px #000;
+  font-family:"Segoe print", Arial, Helvetica, sans-serif;
+  color: rgb(150,10,10);
+  padding:20px 0 0 0;
+  margin:0px auto;
+  font-weight:lighter;
+  -moz-box-shadow:none;  
+  -webkit-box-shadow: none;  
+  box-shadow:none;  
+  text-align:center;
+  display:block;
+ 	
+   
+}background: url(title.jpg) no-repeat ;
 
 ul#menu
 {
@@ -52,7 +65,7 @@ ul#menu li
 ul#menu li a
 {	
 	
-    width: 195px ;
+    width: 185px ;
     line-height: 25px ;
     font-size: 1.2em ;
     font-weight: bold ;
@@ -89,7 +102,16 @@ div#contenu
 
     padding: 0 30px 0 100px ;
     
-    background: url(miniappareil.jpg) no-repeat 15px 5px ;
+    background: url(miniappareil.jpg) no-repeat 15px 25px ;
+
+}
+div#contenuaccueil
+{
+
+    padding: 30px  100px ;
+    
+    background: url(photosaccueil.jpg) no-repeat 15px 20px ;
+    
 }
 div#contenu h2
 {
@@ -127,6 +149,11 @@ div#contenu a:hover
 p#photos 
 {
 	text-align: center ;
+}
+
+p#photosaccueil
+{
+
 }
 
 p#footer
@@ -167,8 +194,8 @@ form
 .connexionstyle{
 
     width:450px;
-    padding:10px;
-    margin:40px auto;
+    
+    margin:50px 400px;
     background: #dea;
     border-radius: 10px;
     -webkit-border-radius:10px;
@@ -180,7 +207,7 @@ form
 .connexionstyle{
 
     padding: 2px;
-    background: #F8F8F8;
+    background-color: rgb(250,200,200);
     border-radius: 6px;
     margin-bottom: 15px;
 }
@@ -198,7 +225,7 @@ form
     -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
     -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
     box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-    border: 1px solid #dea;
+    border: 1px solid #fff;
 }
 .connexionstyle h1 > span{
     display: block;
@@ -227,7 +254,7 @@ form
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     width: 100%;
-    padding: 8px;
+    padding: 2px;
     border-radius: 6px;
     -webkit-border-radius:6px;
     -moz-border-radius:6px;
@@ -238,7 +265,6 @@ form
 }
 
 .connexionstyle .section{
-
     font: normal 20px 'Bitter', serif;
     color: rgb(150,10,10);
     margin-bottom: 5px;
