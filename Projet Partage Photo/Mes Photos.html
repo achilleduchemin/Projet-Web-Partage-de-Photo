@@ -2,7 +2,11 @@
 <html lang="fr">
   <head>
 		<meta charset ="utf-8"/>
+        
+      <!-- <link href="css/bootstrap.css"rel="stylesheet" >  -->
+        <link href="css/lightbox.css"rel="stylesheet" >
         <link rel="stylesheet" href="Style.css" />
+
     <title>SePhoto - Mes Photos</title>
      
 <!--[if IE]>
@@ -17,7 +21,7 @@ html pre
   </head>
   
   <body>
-  <div id="conteneur">    
+    
     <h1 id="header"><a href="#" title="Sephoto - Accueil"><span>PhotoPublish</span></a></h1>
 
     
@@ -30,15 +34,79 @@ html pre
         <li><a href="file:///C:/Users/Achille/Documents/COURS/ING%203/WEBB/Projet%20Partage%20Photo/connexion.html#">Deconnexion</a></li>
       </ul>
     </nav>
-    
+    <div id="conteneur">  
+
+
     <div id="contenu">
       <h2>Mes Photos</h2>
       <p>Voici les photos que vous avez partagé.</p>
 
     </div>
-       <p id="photos"> <img src="montagne.jpg"><br/>
-      Sur le lac gele !</p> 
+    <div class="Gallery">
+
+
+
+      <div class="row">
+        <div  class="col-lg-3">
+          <a class="example-image-link" href="images/imgUser/1.jpg"  data-lightbox="Vacation"data-title= "Photo1"> 
+         <img src="images/imgUser/1.jpg" width="400px" class="img-thumbnail" /> </a>
+          <p>Moi à la Montagne</p> 
+
+
+
+
+      </div>
+
+
+      
+        <div  class="col-lg-3">
+          <a href="images/imgUser/2.jpg" data-lightbox="Vacation"data-title= "Photo2" > 
+          <img src="images/imgUser/2.jpg" width="400px" class="img-thumbnail" /></a>
+          <p> Cet été avec Patrick à la mer !</p>
+      </div>
+
+
+        <div  class="col-lg-3">
+          <a href="images/imgUser/3.jpg" data-lightbox="Vacation"data-title= "Photo3" > 
+          <img src="images/imgUser/3.jpg" width="400px" class="img-thumbnail" /></a>
+          <p> On va voir les plages espagnoles avec Thierry!</p>
+      </div>
+      </div>
+
+     <div class="row">
+        <div  class="col-lg-3">
+          <a href="images/imgUser/4.jpg" data-title= "Photo4" data-lightbox="Vacation"> 
+          <img src="images/imgUser/4.jpg" width="400px" class="img-thumbnail" /></a>
+      </div>
+
+
+      
+        <div  class="col-lg-3">
+          <a href="images/imgUser/5.jpg" data-title= "Photo5" data-lightbox="Vacation"> 
+          <img src="images/imgUser/5.jpg" width="400px" class="img-thumbnail" /></a>
+      </div>
+
+
+        <div  class="col-lg-3">
+          <a href="images/imgUser/6.jpg" data-title= "Photo6" data-lightbox="Vacation"> 
+          <img src="images/imgUser/6.jpg" width="400px" class="img-thumbnail" /></a>
+      </div>
+
+
+      </div>
+
+      </div>
+      <!-- <p id="photos"> <img src="montagne.jpg"><br/>
+      Sur le lac gele !</p> -->
+
+
+
     <p id="footer">Projet Web - Site de Partage de Photos 2016 </p>
   </div>
+
+  <script src="js/lightbox-plus-jquery.min.js"></script>
+<!--<script scr ="js/bootstrap.js"</script>-->
+
+
   </body>
 </html>

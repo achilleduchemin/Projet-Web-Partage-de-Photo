@@ -1,11 +1,12 @@
 body
 {
-    margin: 10px 0 ;
+    margin: 0px 0 ;
     padding: 0 ;
     text-align: center ;
     font: 0.8em "Trebuchet MS", helvetica, sans-serif ;
-    background: #dea ;
-    background-color: rgb(150,90,90);
+    
+    background-color: grey;
+
 }
 div#conteneur
 {
@@ -13,18 +14,20 @@ div#conteneur
 
     margin: 0 auto ;
     text-align: left ;
-    border: 2px solid black ;
+    border: 2px solid rgb(200,90,90);
     background: #fff ;
+    clear: both;
 }
 h1#header
 {
-    height: 120;
-    background: url(logoAccueil.jpg) no-repeat left top;
+    height: 120px;
+    background: url(logoAccueil.jpg) no-repeat 30px;
+    background-color: #3a3c3e;
     margin: 0;
 }
 h1#header a
 {
-    width: 600 ;
+    width: 600 px ;
     height: 0px ;
     display: block ;
     
@@ -33,7 +36,7 @@ h1#header a
   
       font-size: 60px;
   text-shadow: -2px -2px #f00, 2px 2px #a00, -3px 0 4px #000;
-  font-family:"Segoe print", Arial, Helvetica, sans-serif;
+  font-family:'Arial Black', Gadget, fantasy, sans-serif;
   color: rgb(150,10,10);
   padding:20px 0 0 0;
   margin:0px auto;
@@ -47,12 +50,17 @@ h1#header a
    
 }background: url(title.jpg) no-repeat ;
 
+nav{
+	text-align: center;
+}
 ul#menu
 {
+	width: 1000px ;
+
     height: 35px ;
-    margin: 0 ;
-    padding: 0 ;
+    margin: 0px auto;
     
+    text-align:center;
     list-style-type: none ;
 }
 
@@ -60,11 +68,12 @@ ul#menu li
 {
     float: left ;
     text-align: center ;
+
 }
 
 ul#menu li a
 {	
-	
+	margin-top: 10px;
     width: 185px ;
     line-height: 25px ;
     font-size: 1.2em ;
@@ -76,8 +85,8 @@ ul#menu li a
  
 	background-color: rgb(150,10,10);
 
-    border-radius: 10px 10px 0 0;
-    -webkit-border-radius: 10px 10px 0 0;
+    border-radius: 2px 2px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
     -moz-border-radius: 10px 10px 0 0;
     color: #fff;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
@@ -86,11 +95,12 @@ ul#menu li a
     -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
     box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
     border: 1px solid #fff;
+
 }
 
 ul#menu li a:hover
 {
-    background-color: rgb(240,0,0);
+    background-color: rgb(240,100,100);
     -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
     -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
     box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
@@ -103,6 +113,7 @@ div#contenu
     padding: 0 30px 0 100px ;
     
     background: url(miniappareil.jpg) no-repeat 15px 25px ;
+
 
 }
 div#contenuaccueil
@@ -189,6 +200,58 @@ form
 	text-align: center ;
 }
 
+.col-lg-3{
+ position: relative;
+
+  min-height: 1px;
+  padding-top: 30px;
+  padding-right: 15px;
+  padding-left: 50px;
+  padding-bottom: 15px;
+
+  border-radius: 4px;
+  display: block;
+
+
+}
+
+.col-lg-3 img{
+	border-color: solid red;
+	border-radius: 4px;
+	box-shadow: 6px 6px 6px black;
+
+
+}
+
+
+.col-lg-3 p{
+	
+	position: absolute;
+	left: 600px;
+	top: 100px;
+	 display: inline-block;
+
+	 font-family: 'Comic Sans MS', Arial, serif;
+}
+p#user img{
+	box-shadow:  none;
+	margin-top: 20px;
+}
+
+p#user{
+
+		left: 550px;
+	top: 80px;
+	margin-top: 10px;
+
+}
+
+p#descri{
+
+	left: 550px;
+	top: 150px;
+
+}
 
 
 .connexionstyle{
@@ -301,7 +364,7 @@ form
 }
 .connexionstyle input[type="button"]:hover, 
 .connexionstyle input[type="submit"]:hover{
-    background-color: rgb(240,0,0);
+    background-color: rgb(240,100,100);
     -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
     -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
     box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
