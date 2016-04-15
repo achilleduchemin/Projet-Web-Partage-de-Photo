@@ -21,24 +21,26 @@ div#conteneur
 h1#header
 {
     height: 120px;
-    background: url(logoAccueil.jpg) no-repeat 30px;
+
+    background: url(images/iconuser1.png) no-repeat 70px ;
     background-color: #3a3c3e;
-    margin: 0;
+    margin: 0px auto;
+    
 }
-h1#header a
+h1#header a span
 {
-    width: 600 px ;
+    width: 600px ;
     height: 0px ;
     display: block ;
     
-    position: relative ;
-    left: 200px ;
-  
+    position: absolute; ;
+    left: 600px ;
+  	top: 20px;
       font-size: 60px;
   text-shadow: -2px -2px #f00, 2px 2px #a00, -3px 0 4px #000;
   font-family:'Arial Black', Gadget, fantasy, sans-serif;
   color: rgb(150,10,10);
-  padding:20px 0 0 0;
+  padding:0px 0 0 0;
   margin:0px auto;
   font-weight:lighter;
   -moz-box-shadow:none;  
@@ -48,7 +50,17 @@ h1#header a
   display:block;
  	
    
-}background: url(title.jpg) no-repeat ;
+}
+
+h1#header a p{
+	position: absolute;
+	left: 300px;
+	top: 50px;
+	color: white;
+	
+	margin: 0px auto;
+	  font-size: 30px;
+}
 
 nav{
 	text-align: center;
@@ -211,7 +223,7 @@ form
 
   border-radius: 4px;
   display: block;
-
+  
 
 }
 
@@ -232,24 +244,38 @@ form
 	 display: inline-block;
 
 	 font-family: 'Comic Sans MS', Arial, serif;
+	 
 }
 p#user img{
 	box-shadow:  none;
-	margin-top: 20px;
+	
+}
+p#descri img{
+	box-shadow:  none;
+	
+}
+p#date img{
+	box-shadow:  none;
+	
 }
 
 p#user{
 
 		left: 550px;
-	top: 80px;
-	margin-top: 10px;
+	top: 60px;
 
 }
 
 p#descri{
 
 	left: 550px;
-	top: 150px;
+	top: 130px;
+
+}
+p#date{
+
+	left: 550px;
+	top: 190px;
 
 }
 
