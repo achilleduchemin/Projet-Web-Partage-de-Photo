@@ -67,9 +67,9 @@ nav{
 }
 ul#menu
 {
-	width: 1000px ;
+	width: 1040px ;
 
-    height: 35px ;
+    height: 25px ;
     margin: 0px auto;
     
     text-align:center;
@@ -85,8 +85,8 @@ ul#menu li
 
 ul#menu li a
 {	
-	margin-top: 10px;
-    width: 185px ;
+	margin-top: 0px;
+    width: 248px ;
     line-height: 25px ;
     font-size: 1.2em ;
     font-weight: bold ;
@@ -217,6 +217,35 @@ p#footer
     background: #CCF;
 }
 
+
+.uploadalbum {
+	position: relative;
+	overflow: hidden;
+	float: left;
+	clear: left;
+	top:190px;
+	left: 950px;
+	    border: 2px solid rgb(150,10,10);;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin: 2px;
+    background: #DDD;
+    
+    display: inline-block;
+}
+.uploadalbum input {
+   position: absolute;
+    z-index: 2;
+    opacity: 0;
+    width:100%;
+    height:100%;
+}
+.uploadalbum:hover {
+    background: #CCC;
+}
+.uploadalbum:active {
+    background: #CCF;
+}
 
 
 
