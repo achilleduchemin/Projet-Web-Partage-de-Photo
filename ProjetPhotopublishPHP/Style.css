@@ -1,0 +1,477 @@
+body
+{
+    margin: 0px 0 ;
+    padding: 0 ;
+    text-align: center ;
+    font: 0.8em "Trebuchet MS", helvetica, sans-serif ;
+    
+    background-color: grey;
+
+}
+div#conteneur
+{
+    width: 1000px ;
+
+    margin: 0 auto ;
+    text-align: left ;
+    border: 2px solid rgb(200,90,90);
+    background: #fff ;
+    clear: both;
+}
+h1#header
+{
+    height: 120px;
+
+    background: url(images/iconuser1.png) no-repeat 70px ;
+    background-color: #3a3c3e;
+    margin: 0px auto;
+    
+}
+h1#header a span
+{
+    width: 600px ;
+    height: 0px ;
+    display: block ;
+    
+    position: absolute; ;
+    left: 600px ;
+  	top: 20px;
+      font-size: 60px;
+  text-shadow: -2px -2px #f00, 2px 2px #a00, -3px 0 4px #000;
+  font-family:'Arial Black', Gadget, fantasy, sans-serif;
+  color: rgb(150,10,10);
+  padding:0px 0 0 0;
+  margin:0px auto;
+  font-weight:lighter;
+  -moz-box-shadow:none;  
+  -webkit-box-shadow: none;  
+  box-shadow:none;  
+  text-align:center;
+  display:block;
+ 	
+   
+}
+
+h1#header a p{
+	position: absolute;
+	left: 300px;
+	top: 50px;
+	color: white;
+	
+	margin: 0px auto;
+	  font-size: 30px;
+}
+
+nav{
+	text-align: center;
+}
+ul#menu
+{
+	width: 1040px ;
+
+    height: 25px ;
+    margin: 0px auto;
+    
+    text-align:center;
+    list-style-type: none ;
+}
+
+ul#menu li
+{
+    float: left ;
+    text-align: center ;
+
+}
+
+ul#menu li a
+{	
+	margin-top: 0px;
+    width: 248px ;
+    line-height: 25px ;
+    font-size: 1.2em ;
+    font-weight: bold ;
+    letter-spacing: 2px ;
+    
+    display: block ;
+    text-decoration: none ;
+ 
+	background-color: rgb(150,10,10);
+
+    border-radius: 2px 2px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 10px 10px 0 0;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+    
+    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    border: 1px solid #fff;
+
+}
+
+ul#menu li a:hover
+{
+    background-color: rgb(240,100,100);
+    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+}
+
+
+div#contenu
+{
+
+    padding: 0 30px 0 100px ;
+    
+    background: url(miniappareil.jpg) no-repeat 0px 0px ;
+
+
+}
+div#contenuaccueil
+{
+
+    padding: 30px  100px ;
+    
+    background: url(photosaccueil.jpg) no-repeat 15px 20px ;
+    
+}
+div#contenupara
+{
+
+    padding: 30px  100px ;
+    
+    background: url(para.png) no-repeat 30px 80px ;
+    
+}
+div#contenu h2
+{
+    padding-left: 25px ;
+    line-height: 25px ;
+    font-size: 1.4em ;
+    background: url(little_apple.gif) no-repeat left bottom ;
+    color: black ;
+    border: 1px solid black ;
+}
+div#contenu h3
+{
+    margin-left: 15px ;
+    padding-left: 5px ;
+    border-bottom: 1px solid #9b2 ;
+    border-left: 3px solid #9b2 ;
+    color: #9b2 ;
+}
+div#contenu p
+{
+    text-align: justify ;
+    text-indent: 2em ;
+    line-height: 1.7em ;
+}
+div#contenu a
+{
+    color: #8a0 ;
+}
+
+div#contenu a:hover
+{
+    color: #9b2;
+}
+
+p#photos 
+{
+	text-align: center ;
+}
+
+p#photosaccueil
+{
+
+}
+
+p#footer
+{
+    margin: 0 ;
+    padding-right: 10px ;
+    line-height: 30px ;
+    text-align: right ;
+    color: black ;
+}
+
+.upload {
+	position: relative;
+	overflow: hidden;
+	float: left;
+	clear: left;
+	top:230px;
+	left: 750px;
+	    border: 2px solid rgb(150,10,10);;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin: 2px;
+    background: #DDD;
+    
+    display: inline-block;
+}
+.upload input {
+   position: absolute;
+    z-index: 2;
+    opacity: 0;
+    width:100%;
+    height:100%;
+}
+.upload:hover {
+    background: #CCC;
+}
+.upload:active {
+    background: #CCF;
+}
+
+
+.uploadalbum {
+	position: relative;
+	overflow: hidden;
+	float: left;
+	clear: left;
+	top:190px;
+	left: 950px;
+	    border: 2px solid rgb(150,10,10);;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin: 2px;
+    background: #DDD;
+    
+    display: inline-block;
+}
+.uploadalbum input {
+   position: absolute;
+    z-index: 2;
+    opacity: 0;
+    width:100%;
+    height:100%;
+}
+.uploadalbum:hover {
+    background: #CCC;
+}
+.uploadalbum:active {
+    background: #CCF;
+}
+
+
+
+
+pre
+{
+    overflow: auto ;
+    background: #dea ;
+    border: 2px solid #9b2 ;
+    padding: 5px 0 0 5px ;
+    font-size: 1.2em ;
+}
+
+pre span
+{
+    color: #560 ;
+}
+pre span.comment
+{
+    color: #b30000 ;
+}
+
+
+form 
+{
+
+	text-align: center ;
+}
+
+.photostyle{
+ position: relative;
+
+  min-height: 1px;
+  padding-top: 30px;
+  padding-right: 15px;
+  padding-left: 50px;
+  padding-bottom: 15px;
+
+  border-radius: 4px;
+  display: block;
+  
+
+}
+
+.photostyle img{
+	border-color: solid red;
+	border-radius: 4px;
+	box-shadow: 6px 6px 6px black;
+
+
+}
+
+
+.photostyle p{
+	
+	position: absolute;
+	left: 600px;
+	top: 100px;
+	 display: inline-block;
+
+	 font-family: 'Comic Sans MS', Arial, serif;
+	 
+}
+p#user img{
+	box-shadow:  none;
+	
+}
+p#descri img{
+	box-shadow:  none;
+	
+}
+p#date img{
+	box-shadow:  none;
+	
+}
+
+p#user{
+
+		left: 550px;
+	top: 60px;
+
+}
+
+p#descri{
+
+	left: 550px;
+	top: 130px;
+
+}
+p#date{
+
+	left: 550px;
+	top: 190px;
+
+}
+
+
+.inscri{
+
+    width:450px;
+    
+    margin:50px 400px;
+    background: #dea;
+    border-radius: 10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+    -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+    -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+}
+.inscri{
+
+    padding: 2px;
+    background-color: rgb(250,200,200);
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+.inscri h1{
+    
+    background-color: rgb(150,10,10);
+    padding: 10px ;
+    margin: -30px -30px 30px -30px;
+    border-radius: 10px 10px 0 0;
+    -webkit-border-radius: 10px 10px 0 0;
+    -moz-border-radius: 10px 10px 0 0;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+    font: normal 30px 'Bitter', serif;
+    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    border: 1px solid #fff;
+}
+.inscri h1 > span{
+    display: block;
+    margin-top: 2px;
+    font: 13px Arial, Helvetica, sans-serif;
+}
+.inscri label{
+    display: block;
+    font: 13px Arial, Helvetica, sans-serif;
+    color: #888;
+    margin-bottom: 15px;
+}
+.inscri input[type="text"],
+.inscri input[type="date"],
+.inscri input[type="datetime"],
+.inscri input[type="email"],
+.inscri input[type="number"],
+.inscri input[type="search"],
+.inscri input[type="time"],
+.inscri input[type="url"],
+.inscri input[type="password"],
+.inscri textarea,
+.inscri select {
+    display: block;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    padding: 2px;
+    border-radius: 6px;
+    -webkit-border-radius:6px;
+    -moz-border-radius:6px;
+    border: 2px solid #fff;
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+    -moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+    -webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+}
+
+.inscri .section{
+    font: normal 20px 'Bitter', serif;
+    color: rgb(150,10,10);
+    margin-bottom: 5px;
+}
+.inscri .section span {
+    
+    background-color: rgb(150,10,10);
+    padding: 5px 10px 5px 10px;
+    position: absolute;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border: 4px solid #fff;
+    font-size: 14px;
+    margin-left: -45px;
+    color: #fff;
+    margin-top: -3px;
+}
+.inscri input[type="button"], 
+.inscri input[type="submit"]{
+    background-color: rgb(150,10,10);
+    padding: 8px 20px 8px 20px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+    font: normal 30px 'Bitter', serif;
+    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    border: 1px solid #dea;
+    font-size: 15px;
+}
+.inscri input[type="button"]:hover, 
+.inscri input[type="submit"]:hover{
+    background-color: rgb(240,100,100);
+    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+}
+.inscri .privacy-policy{
+    float: right;
+    width: 250px;
+    font: 12px Arial, Helvetica, sans-serif;
+
+    color: #4D4D4D;
+    margin-top: 10px;
+    text-align: right;
+}
