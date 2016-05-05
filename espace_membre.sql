@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 28 Avril 2016 à 12:59
+-- Généré le :  Jeu 05 Mai 2016 à 19:21
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -32,16 +32,24 @@ CREATE TABLE IF NOT EXISTS `membre` (
   `mail` varchar(255) NOT NULL,
   `motdepasse` text NOT NULL,
   `newphoto` varchar(255) NOT NULL,
+  `test` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+-- --------------------------------------------------------
 
 --
--- Contenu de la table `membre`
+-- Structure de la table `photos`
 --
 
-INSERT INTO `membre` (`id`, `pseudo`, `mail`, `motdepasse`, `newphoto`) VALUES
-(1, 'Achille', 'achille@gmail.com', '123', '1.jpg'),
-(3, 'admin', 'admin@gmail.com', 'admin', '');
+CREATE TABLE IF NOT EXISTS `photos` (
+  `name` varchar(255) NOT NULL,
+  `number` int(11) NOT NULL,
+  `iduser` varchar(11) NOT NULL,
+  `Lieu` varchar(255) NOT NULL,
+  `descri` varchar(255) NOT NULL,
+  PRIMARY KEY (`number`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
