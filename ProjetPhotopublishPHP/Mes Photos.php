@@ -2,6 +2,10 @@
 session_start();
 $bdd = new PDO('mysql:host=localhost;dbname=espace_membre','root','');
 
+//$bdd = mysql_connect('localhost', 'root', 'root');
+//$db_selected = mysql_select_db('bdd', $bdd);
+
+
 if (isset($_SESSION['id']) )
 {
   
@@ -9,36 +13,82 @@ if (isset($_SESSION['id']) )
     $requser->execute (array($_SESSION['id']));
     $userinfo= $requser ->fetch();
 
+    $reqphoto = $bdd ->prepare('SELECT * FROM photos WHERE iduser=?');
+    $reqphoto->execute (array($_SESSION['id']));
+    $photoinfo= $reqphoto ->fetch();
+     $count =  $reqphoto-> rowCount();
+    //$count=0;
+    //while ($donnees =  $reqphoto ->fetch()) {
+    //  $count ++;
+   // }
+    
+   // $rows = $reqphoto->fetchAll();
+  //  $count=count($rows);
+    echo 'Il y a '.$count.' photos.';
 
 
-if(isset($_FILES['newphoto']) AND !empty ($_FILES['newphoto']['name']))
+
+   // $photolignes = mysql_num_rows($reqphoto);
+   // $photolignes = $reqphoto -> mysql_numrow
+if(isset($_FILES['newphoto']) AND !empty ($_FILES['newphoto']['name']) AND $_POST['GO'])
+
 {
-  $taillemax = 2097152;
+  $taillemax = 3097152;
   $extensionsValides = array('jpg', 'jpeg', 'gif','png');
 
     if($_FILES['newphoto']['size']<= $taillemax)
     {
-        $extensionupload = strtolower(substr(strrchr($_FILES['newphoto']['name'], '.'), 1));
+
+      $newphoto=$_FILES['newphoto'];
+
+      $extensionupload= strtolower(substr($newphoto['name'],-3));
+
+
+       // $extensionupload = strtolower(substr(strrchr($_FILES['newphoto']['name'], '.'), 1));
         if(in_array($extensionupload, $extensionsValides))
         {
-          $chemin = "images/User/".$_SESSION['id'].".".$extensionupload;
+
+         move_uploaded_file($newphoto['tmp_name'],"images/User/".$newphoto['name']); 
+        $name = $newphoto['name'];
+
+        $insertphoto = $bdd->prepare("INSERT INTO photos (name, iduser, number) VALUES (?,?,?);");
+        $number=$count +1;
+           $insertphoto->execute(array($name, $_SESSION['id'],$number));
+
+
+
+  /*       $result = mysql_query("INSERT INTO photos (name, iduser)
+             VALUES ('$name', '$_SESSION['id']')");
+       if($result)
+        {
+          header('Location: Home.php?id='.$_SESSION['ID']);
+          exit;
+        }
+
+         $chemin = "images/User/".$_SESSION['pseudo'].".".$extensionupload;
 
             $resultat = move_uploaded_file($_FILES['newphoto']['tmp_name'], $chemin);
             if($resultat)
             {
-              $updatephoto = $bdd ->prepare('UPDATE membre SET newphoto = :newphoto WHERE id=:id');
-              $updatephoto -> execute(array( 'newphoto' => $_SESSION['id'].".".$extensionupload, 'id'=> $_SESSION['id']));
+            $insertphoto = $bdd->prepare("INSERT INTO `espace_membre`.`photos` (`user`) VALUES (?);");
+
+            $insertphoto->execute(array($_SESSION['pseudo'].".".$extensionupload));*/
+
+
+
+
+           //   $updatephoto = $bdd ->prepare('UPDATE membre SET newphoto = :newphoto WHERE id=:id');
+             // $updatephoto -> execute(array( 'newphoto' => $_SESSION['id'].".".$extensionupload, 'id'=> $_SESSION['id']));
 
 
               $erreur="Photo ajoutée !";
-            }
-            else $erreur="Erreur durant l'importation de l'image.";
+   
         }
         else $erreur = "Votre image doit être aux formats jpg, jpeg, gif ou png. ";
     }
     else
     {
-      $erreur = "Votre image ne doit pas dépasser 2 Mo.";
+      $erreur = "Votre image ne doit pas dépasser 3 Mo.";
     }
 
 }
@@ -115,13 +165,21 @@ html pre
 
 <!-- IMAGE UPLOAD -->
           <?php
-          if(!empty($userinfo['newphoto']))
-          {
+
+          for ($i=$count; $i>0;$i--)
+          { 
+           $reqphoto = $bdd ->prepare('SELECT * FROM photos WHERE iduser=? AND number =?');
+          $reqphoto->execute (array($_SESSION['id'],$i));
+           $photoinfo= $reqphoto ->fetch();
+
+
+         // if(!empty($photoinfo['iduser']))
+          //{
           ?>
   
           <div  class="photostyle">
-          <a href="images/User/<?php echo $userinfo['newphoto']; ?>"  data-lightbox="Vacation"data-title= "Photo1"> 
-         <img src="images/User/<?php echo $userinfo['newphoto']; ?>" width="400px" /> </a>
+          <a href="images/User/<?php echo $photoinfo['name']; ?>"  data-lightbox="Vacation"data-title= "Photo1"> 
+         <img src="images/User/<?php echo $photoinfo['name']; ?>" width="400px" /> </a>
 
           
          <p>
@@ -132,7 +190,7 @@ html pre
            <p id="date"><img src="images/iconhorloge.png" width="20px" class="user" />20/05/2015</p> 
            </p>
       </div>
-
+ <hr>
       <?php
        }
        ?>
@@ -152,7 +210,7 @@ html pre
 
 
       </div>
- <hr>
+
 
       
         <div  class="photostyle">
