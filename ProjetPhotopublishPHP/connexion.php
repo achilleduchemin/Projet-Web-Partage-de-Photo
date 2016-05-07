@@ -6,7 +6,7 @@ session_start();
 $bdd = new PDO('mysql:host=localhost;dbname=espace_membre','root','');
 
 /* INSCRIPTION */
-if(isset($_POST['SignUp']))
+if(isset($_POST['SignUp']) )
 {          
           $pseudo= htmlspecialchars($_POST['user2']);
         
@@ -25,11 +25,12 @@ if(isset($_POST['SignUp']))
             $insertmembre = $bdd->prepare("INSERT INTO membre(pseudo,mail,motdepasse)VALUES (?,?,?)");
 
             $insertmembre->execute(array($pseudo,$mail,$motdepasse));
+           $enregistrer = "Vous êtes bien enregistré(e), connectez vous !";
           }
           else $erreur ="Les deux mots de passe ne correspondent pas.";
 
 
-           $enregistrer = "Vous êtes bien enregistré(e), connectez vous !";
+           
       
       }
       else
@@ -48,25 +49,32 @@ if(isset($_POST['Connect']))
       $motdepasseconnect= htmlspecialchars($_POST['motdepasse']);
 
       if(!empty($userconnect) AND !empty($motdepasseconnect))
-      {
+      {         
+           if($userconnect=="administrateur" AND $motdepasseconnect=="administrateur")
+              {
+                  header("Location: administrateur.php");
+              }
+                else{
           $requser= $bdd-> prepare("SELECT *FROM membre WHERE pseudo= ? AND motdepasse=?");
           $requser ->execute(array($userconnect,$motdepasseconnect));
           $userexist = $requser->rowCount();
           if($userexist ==1)
           {
+
+            
               $userinfo = $requser ->fetch();
               $_SESSION['id']= $userinfo['id'];
                $_SESSION['pseudo']= $userinfo['pseudo'];
                 $_SESSION['mail']= $userinfo['mail'];
                 header("Location: Accueil.php?id=".$_SESSION['id']);
-
-          }
+              }
+        
           else $erreurconnect ="Mauvais pseudo ou mauvais mot de passe !";  
-
+        }
       }
       else  $erreurconnect ="Veuillez remplir tous les champs";
 
-}
+}  
 
 
 
@@ -146,7 +154,7 @@ if(isset($_POST['Connect']))
 
   <?php
       if(isset($erreur)) echo '<font color="red">'.$erreur. "</font>";
-      else echo  '<font color="blue">'."Vous êtes bien enregistré(e), connectez vous !"."</font>";
+     if(isset($enregistrer)) echo '<font color="blue">'.$enregistrer. "</font>";
     
   ?>
 

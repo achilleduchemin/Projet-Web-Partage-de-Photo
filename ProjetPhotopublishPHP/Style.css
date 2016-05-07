@@ -18,6 +18,16 @@ div#conteneur
     background: #fff ;
     clear: both;
 }
+div#admin
+{
+    width: 1000px ;
+
+    margin: 0 auto ;
+    text-align: left ;
+    border: 2px solid rgb(200,90,90);
+    background: #fff ;
+    clear: both;
+}
 h1#header
 {
     height: 120px;
@@ -199,10 +209,8 @@ p#footer
 .upload {
 	position: relative;
 	overflow: hidden;
-	float: left;
-	clear: left;
-	top:230px;
-	left: 750px;
+
+
 	    border: 2px solid rgb(150,10,10);;
     border-radius: 4px;
     padding: 10px 20px;
@@ -210,13 +218,14 @@ p#footer
     background: #DDD;
     
     display: inline-block;
+
 }
 .upload input {
-   position: absolute;
-    z-index: 2;
+ 
+
     opacity: 0;
-    width:100%;
-    height:100%;
+  
+    margin: 0 ;
 }
 .upload:hover {
     background: #CCC;
@@ -231,7 +240,7 @@ p#footer
 	overflow: hidden;
 	float: left;
 	clear: left;
-	top:190px;
+	top:220px;
 	left: 950px;
 	    border: 2px solid rgb(150,10,10);;
     border-radius: 4px;
@@ -252,6 +261,35 @@ p#footer
     background: #CCC;
 }
 .uploadalbum:active {
+    background: #CCF;
+}
+
+.uploadalbum2 {
+    position: relative;
+    overflow: hidden;
+    float: left;
+    clear: left;
+    top: 176px;
+    left: 750px;
+        border: 2px solid rgb(150,10,10);;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin: 2px;
+    background: #DDD;
+    
+    display: inline-block;
+}
+.uploadalbum2 input {
+   position: absolute;
+    z-index: 2;
+    opacity: 0;
+    width:100%;
+    height:100%;
+}
+.uploadalbum2:hover {
+    background: #CCC;
+}
+.uploadalbum2:active {
     background: #CCF;
 }
 
@@ -290,7 +328,7 @@ form
   padding-top: 30px;
   padding-right: 15px;
   padding-left: 50px;
-  padding-bottom: 15px;
+  padding-bottom: 70px;
 
   border-radius: 4px;
   display: block;
@@ -329,6 +367,20 @@ p#date img{
 	box-shadow:  none;
 	
 }
+p#lieu img{
+    box-shadow:  none;
+    
+}
+p#modif img{
+    box-shadow:  none;
+
+    
+}
+p#partage img{
+    box-shadow:  none;
+
+    
+}
 
 p#user{
 
@@ -343,12 +395,30 @@ p#descri{
 	top: 130px;
 
 }
-p#date{
+p#lieu{
 
 	left: 550px;
 	top: 190px;
 
 }
+
+p#date{
+
+    left: 550px;
+    top: 250px;
+
+}
+p#modif{
+   left: 550px;
+    top: 310px;
+
+}
+p#partage{
+   left: 850px;
+    top: 210px;
+
+}
+
 
 
 .inscri{
@@ -474,4 +544,158 @@ p#date{
     color: #4D4D4D;
     margin-top: 10px;
     text-align: right;
+}
+
+
+
+            #popupBoxOnePosition{
+                top: 0; left: 0; position: fixed; width: 100%; height: 120%;
+                background-color: rgba(0,0,0,0.7); display: none;
+            }
+            #popupBoxTwoPosition{
+                top: 0; left: 0; position: fixed; width: 100%; height: 120%;
+                background-color: rgba(0,0,0,0.7); display: none;
+            }#popupBoxThreePosition{
+                top: 0; left: 0; position: fixed; width: 100%; height: 120%;
+                background-color: rgba(0,0,0,0.7); display: none;
+            }
+            .popupBoxWrapper{
+                width: 550px; margin: 50px auto; text-align: left;
+            }
+            .popupBoxContent{
+                 padding: 15px;
+            }
+
+                #popupBoxTwoPosition{
+                top: 0; left: 0; position: fixed; width: 100%; height: 120%;
+                background-color: rgba(0,0,0,0.7); display: none;
+            }
+
+
+
+
+
+
+
+
+
+
+
+.ajoutphoto{
+
+    width:450px;
+    
+    margin:30px 35px;
+    background: #dea;
+    border-radius: 10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+    -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+    -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+}
+.ajoutphoto{
+
+    padding: 2px;
+    background-color: rgb(250,200,200);
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.ajoutphoto h1{
+    
+    background-color: rgb(150,10,10);
+    padding: 10px ;
+    margin: -30px -30px 30px -30px;
+    border-radius: 10px 10px 0 0;
+    -webkit-border-radius: 10px 10px 0 0;
+    -moz-border-radius: 10px 10px 0 0;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+    font: normal 30px 'Bitter', serif;
+    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    border: 1px solid #fff;
+}
+
+
+.ajoutphoto label{
+    display: block;
+    font: 13px Arial, Helvetica, sans-serif;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+
+.ajoutphoto input[type="text"],
+.ajoutphoto input[type="date"],
+.ajoutphoto input[type="datetime"],
+.ajoutphoto input[type="email"],
+.ajoutphoto input[type="number"],
+.ajoutphoto input[type="search"],
+.ajoutphoto input[type="time"],
+.ajoutphoto input[type="url"],
+.ajoutphoto input[type="password"],
+.ajoutphoto textarea,
+.ajoutphoto select {
+    display: block;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    padding: 2px;
+    border-radius: 6px;
+    -webkit-border-radius:6px;
+    -moz-border-radius:6px;
+    border: 2px solid #fff;
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+    -moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+    -webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+}
+
+.ajoutphoto .section{
+    font: normal 20px 'Bitter', serif;
+    color: rgb(150,10,10);
+    margin-bottom: 5px;
+}
+.ajoutphoto .section span {
+    
+    background-color: rgb(150,10,10);
+    padding: 5px 10px 5px 10px;
+    position: absolute;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border: 4px solid #fff;
+    font-size: 14px;
+    margin-left: -45px;
+    color: #fff;
+    margin-top: -3px;
+}
+.ajoutphoto input[type="button"], 
+.ajoutphoto input[type="submit"]{
+    background-color: rgb(150,10,10);
+    padding: 8px 20px 8px 20px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+    font: normal 30px 'Bitter', serif;
+    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    border: 1px solid #dea;
+    font-size: 15px;
+}
+.ajoutphoto input[type="button"]:hover, 
+.ajoutphoto input[type="submit"]:hover{
+    background-color: rgb(240,100,100);
+    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+}
+.ajoutphoto a{
+    margin : 121px;
 }

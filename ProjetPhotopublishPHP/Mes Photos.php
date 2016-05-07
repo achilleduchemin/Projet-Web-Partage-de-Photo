@@ -13,9 +13,9 @@ if (isset($_SESSION['id']) )
     $requser->execute (array($_SESSION['id']));
     $userinfo= $requser ->fetch();
 
-    $reqphoto = $bdd ->prepare('SELECT * FROM photos WHERE iduser=?');
+    $reqphoto = $bdd ->prepare('SELECT * FROM photos WHERE iduser=? ORDER BY id DESC');
     $reqphoto->execute (array($_SESSION['id']));
-    $photoinfo= $reqphoto ->fetch();
+    //$photoinfo= $reqphoto ->fetch();
      $count =  $reqphoto-> rowCount();
     //$count=0;
     //while ($donnees =  $reqphoto ->fetch()) {
@@ -24,15 +24,20 @@ if (isset($_SESSION['id']) )
     
    // $rows = $reqphoto->fetchAll();
   //  $count=count($rows);
-    echo 'Il y a '.$count.' photos.';
+    $reqphotoall = $bdd ->prepare('SELECT * FROM photos ');
+    $reqphotoall->execute ();
+    $photoall= $reqphotoall ->fetch();
+     $countall =  $reqphotoall-> rowCount();
+
+if(isset($_FILES['newphoto']) AND !empty ($_FILES['newphoto']['name']) AND $_POST['Ajouter'])
+
+{   
+
+   $titre= htmlspecialchars($_POST['titre']);
+        
+          $lieu= htmlspecialchars($_POST['lieu']);
 
 
-
-   // $photolignes = mysql_num_rows($reqphoto);
-   // $photolignes = $reqphoto -> mysql_numrow
-if(isset($_FILES['newphoto']) AND !empty ($_FILES['newphoto']['name']) AND $_POST['GO'])
-
-{
   $taillemax = 3097152;
   $extensionsValides = array('jpg', 'jpeg', 'gif','png');
 
@@ -47,43 +52,42 @@ if(isset($_FILES['newphoto']) AND !empty ($_FILES['newphoto']['name']) AND $_POS
        // $extensionupload = strtolower(substr(strrchr($_FILES['newphoto']['name'], '.'), 1));
         if(in_array($extensionupload, $extensionsValides))
         {
+          if(!empty($_POST['titre']) AND !empty($_POST['lieu']))
+          {
 
          move_uploaded_file($newphoto['tmp_name'],"images/User/".$newphoto['name']); 
         $name = $newphoto['name'];
+        $date = date("d-m-Y");
+        $heure = date("H:i");
+        $heureetdate = "Le $date à $heure";
 
-        $insertphoto = $bdd->prepare("INSERT INTO photos (name, iduser, number) VALUES (?,?,?);");
+        $id=$countall+1;
+
+
+       if(isset( $_POST['public']) )
+         {
+              
+              $partage="public";
+              
+         }
+        if(isset($_POST['private'] ))
+         {
+             
+              $partage="private";
+         }
+
+
+
+        $insertphoto = $bdd->prepare("INSERT INTO photos (name, iduser, number,descri,lieu,date,id,partage) VALUES (?,?,?,?,?,?,?,?);");
         $number=$count +1;
-           $insertphoto->execute(array($name, $_SESSION['id'],$number));
-
-
-
-  /*       $result = mysql_query("INSERT INTO photos (name, iduser)
-             VALUES ('$name', '$_SESSION['id']')");
-       if($result)
-        {
-          header('Location: Home.php?id='.$_SESSION['ID']);
-          exit;
-        }
-
-         $chemin = "images/User/".$_SESSION['pseudo'].".".$extensionupload;
-
-            $resultat = move_uploaded_file($_FILES['newphoto']['tmp_name'], $chemin);
-            if($resultat)
-            {
-            $insertphoto = $bdd->prepare("INSERT INTO `espace_membre`.`photos` (`user`) VALUES (?);");
-
-            $insertphoto->execute(array($_SESSION['pseudo'].".".$extensionupload));*/
-
-
-
-
-           //   $updatephoto = $bdd ->prepare('UPDATE membre SET newphoto = :newphoto WHERE id=:id');
-             // $updatephoto -> execute(array( 'newphoto' => $_SESSION['id'].".".$extensionupload, 'id'=> $_SESSION['id']));
+        $insertphoto->execute(array($name, $_SESSION['id'],$number,$titre,$lieu,$heureetdate,$id,$partage));
+  
 
 
               $erreur="Photo ajoutée !";
    
-        }
+        }else $erreur = 'Veuillez remplir tous les champs.';
+      }
         else $erreur = "Votre image doit être aux formats jpg, jpeg, gif ou png. ";
     }
     else
@@ -92,6 +96,37 @@ if(isset($_FILES['newphoto']) AND !empty ($_FILES['newphoto']['name']) AND $_POS
     }
 
 }
+
+
+if (isset($_POST['Modifier']) AND isset($_POST['titreancien']) AND isset($_POST['titrenew']) AND isset($_POST['lieunew']))
+{
+  $titreancien= htmlspecialchars($_POST['titre']);
+
+
+   $titrenew= htmlspecialchars($_POST['titrenew']);
+  $lieunew= htmlspecialchars($_POST['lieunew']);
+      
+
+
+
+
+      $updatetitre =$bdd -> prepare("UPDATE photos SET descri = ? AND lieu =? WHERE descri =?");
+
+      $updatetitre->execute(array( $titrenew, $lieunew, $titreancien
+        ));
+
+
+
+
+    
+      echo "Modifications Enregistrées.";
+    
+    
+
+}
+
+
+
 
 ?>
 
@@ -114,20 +149,51 @@ html pre
 }
 </style>
 <![endif]-->
+<!-- PopUP-->
+    <script type="text/javascript">
+      <!--
+          function toggle_visibility(id) {
+             var e = document.getElementById(id);
+             if(e.style.display == 'block')
+                e.style.display = 'none';
+             else
+                e.style.display = 'block';
+          }
+      //-->
+    </script>
+
+
+
+
 
   </head>
   
   <body>
-   <form method="POST" action="" enctype="multipart/form-data">
+
+
+<!--   <form method="POST" action="" enctype="multipart/form-data">
   <div class ="upload"> 
   
   <input type="file" name="newphoto"/><span>Selectionner une photo</span>
-  </div>
+  </div>-->
+
+
+ 
+
 
    <div class="uploadalbum">
- <input type="submit" name="GO" /><span>Ajouter</span></div>
- </form> 
 
+
+<a href="javascript:void(0)" onclick="toggle_visibility('popupBoxOnePosition');">Ajouter une photo</a> 
+
+ </div>
+
+   <div class="uploadalbum2">
+
+
+<a href="javascript:void(0)" onclick="toggle_visibility('popupBoxTwoPosition');">Modifier une photo</a> 
+
+ </div>
 
 
     <h1 id="header"><a href="#" title="Sephoto - Accueil"><p>Profil : <?php echo $userinfo['pseudo']; ?></p><span>PhotoPublish</span></a></h1>
@@ -150,15 +216,16 @@ html pre
 
       <h2>Mes Photos</h2>
       
-      <p>Voici les photos que vous avez partagé.
- 
+      <p>Voici les photos que vous avez partagées.
+    
+      <br>
+  
 
-    </div>
-
-     <?php
+     <?php 
+      echo 'Vous avez '.$count.' photos.';
  if(isset($erreur)) echo '<font color="red">'.$erreur. "</font>";
 ?></p>
-
+  </div>
 
 
     <div class="Gallery">
@@ -166,98 +233,111 @@ html pre
 <!-- IMAGE UPLOAD -->
           <?php
 
-          for ($i=$count; $i>0;$i--)
+          while ($photoinfo= $reqphoto ->fetch())
           { 
-           $reqphoto = $bdd ->prepare('SELECT * FROM photos WHERE iduser=? AND number =?');
-          $reqphoto->execute (array($_SESSION['id'],$i));
-           $photoinfo= $reqphoto ->fetch();
 
 
+          $buttonsupp = "Supprimer".$photoinfo['id'];
+
+           if (isset($_POST[ $buttonsupp]))
+{
+           $deletephoto = $bdd ->prepare('DELETE FROM photos WHERE id=?');
+          $deletephoto->execute (array($photoinfo['id']));
+
+          //$count--;
+
+          for($j=$countall;$j>0;$j--)
+          {
+           $reqphotoall = $bdd ->prepare('SELECT * FROM photos WHERE id =?');
+          $reqphotoall->execute (array($j));
+           $photoinfoall= $reqphoto ->fetch();
+
+           if($photoinfoall['id']>$photoinfo['id'])
+           {
+            $idmoinsun = $photoinfoall['id']-1;
+
+            $updatenumb =$bdd -> prepare('UPDATE photos SET id = ? WHERE id =?');
+
+            $updatenumb->execute(array( $idmoinsun, $photoinfoall['id']));
+
+
+           }}
+
+
+
+          for($j=$count;$j>0;$j--)
+          {
+           $reqphotoall = $bdd ->prepare('SELECT * FROM photos WHERE iduser =? AND number=?');
+          $reqphotoall->execute (array($userinfo['id'],$j));
+           $photoinfoall= $reqphoto ->fetch();
+
+           if($photoinfoall['number']>$photoinfo['number'])
+           {
+            $idmoinsun = $photoinfoall['number']-1;
+
+            $updatenumb =$bdd -> prepare('UPDATE photos SET number = ? WHERE number =?');
+
+            $updatenumb->execute(array( $idmoinsun, $photoinfoall['number']));
+
+
+           }
+
+
+
+          }
+          
+
+}
          // if(!empty($photoinfo['iduser']))
           //{
           ?>
   
           <div  class="photostyle">
-          <a href="images/User/<?php echo $photoinfo['name']; ?>"  data-lightbox="Vacation"data-title= "Photo1"> 
+          <a href="images/User/<?php echo $photoinfo['name']; ?>"  data-lightbox="Vacation"data-title= "<?php echo $photoinfo['descri']; ?>"> 
          <img src="images/User/<?php echo $photoinfo['name']; ?>" width="400px" /> </a>
 
           
          <p>
          
-         <p id="user"><img src="images/iconuser.png" width="40px" class="user" /> BOBdu67</p>
+         <p id="user"><img src="images/iconuser.png" width="40px" class="user" /><?php echo $userinfo['pseudo']; ?></p>
          
-          <p id="descri"><img src="images/imgdescri.jpg" width="30px" class="user" />Moi à la Montagne !</p> 
-           <p id="date"><img src="images/iconhorloge.png" width="20px" class="user" />20/05/2015</p> 
+          <p id="descri"><img src="images/imgdescri.jpg" width="30px" class="user" /><?php echo $photoinfo['descri']; ?></p> 
+          <p id="lieu"><img src="images/lieu.png" width="30px" class="user" /><?php echo $photoinfo['lieu']; ?></p> 
+           <p id="date"><img src="images/iconhorloge.png" width="20px" class="user" /><?php echo $photoinfo['date']; ?></p> 
            </p>
-      </div>
+           <p id="partage">
+           <?php
+           if($photoinfo['partage']=="public") 
+            {
+           ?>
+         <img src="images/public.png" width="50px" class="user" />
+          <?php
+            }
+            else{
+          ?>
+           <img src="images/private.png" width="50px" class="user" />
+           <?php
+         }
+           ?>
+          </p>
+
+          <p id="modif"><a href="javascript:void(0)" onclick="toggle_visibility('popupBoxTwoPosition');"><img src="images/modif.png" width="40px" class="user" /></p> </a>
+           </p>
+</div>
+           <form method="POST" action="" >
+   
+
+              <input type="submit" name="Supprimer<?php echo $photoinfo['id'];?>" value="Supprimer" />
+           </form>
+      
  <hr>
       <?php
        }
        ?>
 
-        <div  class="photostyle">
-          <a href="images/imgUser/1.jpg"  data-lightbox="Vacation"data-title= "Photo1"> 
-         <img src="images/imgUser/1.jpg" width="400px" /> </a>
 
-          
-         <p>
-         
-         <p id="user"><img src="images/iconuser.png" width="40px" class="user" /> BOBdu67</p>
-         
-          <p id="descri"><img src="images/imgdescri.jpg" width="30px" class="user" />Moi à la Montagne !</p> 
-           <p id="date"><img src="images/iconhorloge.png" width="20px" class="user" />20/05/2015</p> 
-           </p>
-
-
-      </div>
-
-
-      
-        <div  class="photostyle">
-          <a href="images/imgUser/2.jpg" data-lightbox="Vacation"data-title= "Photo2" > 
-          <img src="images/imgUser/2.jpg" width="400px" class="img-thumbnail" /></a>
-     <p>
-         
-         <p id="user"><img src="images/iconuser.png" width="40px" class="user" /> BOBdu67 </p>
-          <p id="descri"><img src="images/imgdescri.jpg" width="30px" class="user" />A la mer avec Jacky</p> 
-          <p id="date"><img src="images/iconhorloge.png" width="20px" class="user" />20/05/2015</p> 
-           </p>
-
-
-      </div>
-
- <hr>
-        <div  class="photostyle">
-          <a href="images/imgUser/3.jpg" data-lightbox="Vacation"data-title= "Photo3" > 
-          <img src="images/imgUser/3.jpg" width="400px" class="img-thumbnail" /></a>
-            <p>
-         
-         <p id="user"><img src="images/iconuser.png" width="40px" class="user" /> BOBdu67</p>
-          <p id="descri"><img src="images/imgdescri.jpg" width="20px" class="user" />Sur les plages avec des espagnoles</p>  </p>
-          <p id="date"><img src="images/iconhorloge.png" width="20px" class="user" />20/05/2015</p> 
-
-
-      </div>
-    
- <hr>
- 
-        <div  class="photostyle">
-          <a href="images/imgUser/4.jpg" data-title= "Photo4" data-lightbox="Vacation"> 
-          <img src="images/imgUser/4.jpg" width="400px" class="img-thumbnail" /></a>
-          <p>
-         
-         <p id="user"><img src="images/iconuser.png" width="40px" class="user" /> BOBdu67 </p>
-          <p id="descri"><img src="images/imgdescri.jpg" width="30px" class="user" />A la plage avec mami</p>
-           <p id="date"><img src="images/iconhorloge.png" width="20px" class="user" />20/05/2015</p> 
-            </p>
-
-
-            </div>
 
  
-
-
-      </div>
 
 
       </div>
@@ -272,6 +352,96 @@ html pre
 
   <script src="js/lightbox-plus-jquery.min.js"></script>
 <!--<script scr ="js/bootstrap.js"</script>-->
+
+
+    <div id="popupBoxOnePosition">
+      <div class="popupBoxWrapper">
+        <div class="popupBoxContent">
+
+
+     
+
+
+
+          <div class="ajoutphoto">
+          <form method="POST" action="" enctype="multipart/form-data">
+<h1>Ajouter une photo <a href="javascript:void(0)" onclick="toggle_visibility('popupBoxOnePosition');"> 
+          <img src="images/fermer.png" width="20px" class="img-thumbnail" /></a></h1>
+ 
+    <div class="section"><span>1</span>Choisissez l'image </div>
+    <div class="inner-wrap">
+
+   
+
+       <div class ="upload"> 
+  
+  <input type="file" name="newphoto"/><span>Selectionner une photo</span>
+  </div>
+    </div>
+
+
+ 
+        <div class="section"><span>2</span>Titre</div>
+        <div class="inner-wrap">
+        <label>Donnez un titre à votre photo <input type="text" name="titre" /></label>
+    </div>
+       <div class="section"><span>3</span>Lieu</div>
+        <div class="inner-wrap">
+        <label>Ou avez-vous pris cette photo ?<input type="text" name="lieu" /></label>
+    </div>
+            <input type="checkbox" name="private" >Photo Privée<input type="checkbox" name="public" >Photo Public
+            <br>
+          <input type="submit" name="Ajouter" value="Ajouter" />
+          
+          </div>
+        </div>
+      </div>
+    </div>
+</form>
+
+
+<!-- Modif -->
+
+
+
+
+    <div id="popupBoxTwoPosition">
+      <div class="popupBoxWrapper">
+        <div class="popupBoxContent">
+
+
+          <div class="ajoutphoto">
+          <form method="POST" action="" >
+<h1>Modifications <a href="javascript:void(0)" onclick="toggle_visibility('popupBoxTwoPosition');"> 
+          <img src="images/fermer.png" width="20px" class="img-thumbnail" /></a></h1>
+ 
+
+
+
+ 
+        <div class="section"><span>1</span>Nom</div>
+        <div class="inner-wrap">
+        <label>Entrez le nom de la photo à modifier <input type="text" name="titre" /></label>
+    </div>
+       <div class="section"><span>2</span>Entrez les nouvelles informations</div>
+        <div class="inner-wrap">
+        <label>Modifier le nom<input type="text" name="titrenew" /></label>
+    </div>
+        <div class="inner-wrap">
+        <label>Modifier le lieu<input type="text" name="lieunew" /></label>
+    </div>
+
+          <input type="submit" name="Modifier" value="Modifier" />
+          
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+</form>
+
 
 
   </body>
