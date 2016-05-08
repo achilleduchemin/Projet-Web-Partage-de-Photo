@@ -72,14 +72,6 @@ if (isset($_SESSION['id']) )
 
     <title>SePhoto - Mes Photos</title>
      
-<!--[if IE]>
-<style type="text/css">
-html pre
-{
-  width: 636px ;
-}
-</style>
-<![endif]-->
 
   </head>
   
@@ -139,8 +131,7 @@ html pre
       </div>
       </div>
 
-      <!-- <p id="photos"> <img src="montagne.jpg"><br/>
-      Sur le lac gele !</p> -->
+ 
 
 
 
@@ -148,7 +139,7 @@ html pre
   </div>
 
   <script src="js/lightbox-plus-jquery.min.js"></script>
-<!--<script scr ="js/bootstrap.js"</script>-->
+
 
 
   </body>

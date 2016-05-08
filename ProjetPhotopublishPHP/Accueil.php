@@ -89,6 +89,7 @@ if (isset($_SESSION['id']) )
       </div>
  <hr>
       <?php
+
        }
        ?>
 

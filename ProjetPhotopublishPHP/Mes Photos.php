@@ -2,8 +2,6 @@
 session_start();
 $bdd = new PDO('mysql:host=localhost;dbname=espace_membre','root','');
 
-//$bdd = mysql_connect('localhost', 'root', 'root');
-//$db_selected = mysql_select_db('bdd', $bdd);
 
 
 if (isset($_SESSION['id']) )
@@ -17,17 +15,22 @@ if (isset($_SESSION['id']) )
     $reqphoto->execute (array($_SESSION['id']));
     //$photoinfo= $reqphoto ->fetch();
      $count =  $reqphoto-> rowCount();
-    //$count=0;
-    //while ($donnees =  $reqphoto ->fetch()) {
-    //  $count ++;
-   // }
-    
-   // $rows = $reqphoto->fetchAll();
-  //  $count=count($rows);
+
     $reqphotoall = $bdd ->prepare('SELECT * FROM photos ');
     $reqphotoall->execute ();
     $photoall= $reqphotoall ->fetch();
      $countall =  $reqphotoall-> rowCount();
+
+
+    $reqalbum = $bdd ->prepare('SELECT * FROM album WHERE iduser=? ORDER BY id DESC');
+    $reqalbum->execute (array($_SESSION['id']));
+    //$photoinfo= $reqphoto ->fetch();
+     $countalbum =  $reqalbum-> rowCount();
+
+
+    $reqalbumbox = $bdd ->prepare('SELECT * FROM album WHERE iduser=? ORDER BY id DESC');
+    $reqalbumbox->execute (array($_SESSION['id']));
+
 
 if(isset($_FILES['newphoto']) AND !empty ($_FILES['newphoto']['name']) AND $_POST['Ajouter'])
 
@@ -76,11 +79,17 @@ if(isset($_FILES['newphoto']) AND !empty ($_FILES['newphoto']['name']) AND $_POS
               $partage="private";
          }
 
+        if( $_POST['selectalbum']=="Aucun")
+        {
+            $album="Aucun";
+        }else{
+            $album = $_POST['selectalbum'];
+        }
 
 
-        $insertphoto = $bdd->prepare("INSERT INTO photos (name, iduser, number,descri,lieu,date,id,partage) VALUES (?,?,?,?,?,?,?,?);");
+        $insertphoto = $bdd->prepare("INSERT INTO photos (name, iduser, number,descri,lieu,date,id,partage, nomalbum) VALUES (?,?,?,?,?,?,?,?,?);");
         $number=$count +1;
-        $insertphoto->execute(array($name, $_SESSION['id'],$number,$titre,$lieu,$heureetdate,$id,$partage));
+        $insertphoto->execute(array($name, $_SESSION['id'],$number,$titre,$lieu,$heureetdate,$id,$partage, $album));
   
 
 
@@ -97,7 +106,7 @@ if(isset($_FILES['newphoto']) AND !empty ($_FILES['newphoto']['name']) AND $_POS
 
 }
 
-
+/*
 if (isset($_POST['Modifier']) AND isset($_POST['titreancien']) AND isset($_POST['titrenew']) AND isset($_POST['lieunew']))
 {
   $titreancien= htmlspecialchars($_POST['titre']);
@@ -123,7 +132,23 @@ if (isset($_POST['Modifier']) AND isset($_POST['titreancien']) AND isset($_POST[
     
     
 
+}*/
+if (isset($_POST['Creer']) AND isset($_POST['titrealbum']) AND isset($_POST['descrialbum']) )
+{
+
+
+      $namealbum= htmlspecialchars($_POST['titrealbum']);
+      $descrialbum= htmlspecialchars($_POST['descrialbum']);
+      $insertalbum = $bdd->prepare("INSERT INTO album (name, iduser,descri) VALUES (?,?,?);");
+   
+      $insertalbum->execute(array($namealbum, $_SESSION['id'], $descrialbum));
+      $erreur = "Album Créé !";
+
+
 }
+
+
+
 
 
 
@@ -171,11 +196,6 @@ html pre
   <body>
 
 
-<!--   <form method="POST" action="" enctype="multipart/form-data">
-  <div class ="upload"> 
-  
-  <input type="file" name="newphoto"/><span>Selectionner une photo</span>
-  </div>-->
 
 
  
@@ -194,6 +214,16 @@ html pre
 <a href="javascript:void(0)" onclick="toggle_visibility('popupBoxTwoPosition');">Modifier une photo</a> 
 
  </div>
+  <div class="uploadalbum3">
+
+
+<a href="javascript:void(0)" onclick="toggle_visibility('popupBoxThreePosition');">Créer un album</a> 
+
+ </div>
+
+
+
+
 
 
     <h1 id="header"><a href="#" title="Sephoto - Accueil"><p>Profil : <?php echo $userinfo['pseudo']; ?></p><span>PhotoPublish</span></a></h1>
@@ -288,6 +318,9 @@ html pre
           
 
 }
+
+
+
          // if(!empty($photoinfo['iduser']))
           //{
           ?>
@@ -328,16 +361,121 @@ html pre
    
 
               <input type="submit" name="Supprimer<?php echo $photoinfo['id'];?>" value="Supprimer" />
+     
+   
+
+              <input type="submit" name="Info<?php echo $photoinfo['id'];?>" value="Informations" />
            </form>
+             <?php
+          $buttoninfo = "Info".$photoinfo['id'];
+
+           if (isset($_POST[ $buttoninfo]))
+{
+            $adresse = "images/User/".$photoinfo['name'];
+
+              $exif = exif_read_data($adresse, 0, true);
+        echo "Nom de la photo :<br />\n" .$photoinfo['name'];
+        foreach ($exif as $key => $section) {
+        foreach ($section as $name => $val) {
+         echo "$key.$name: $val<br />\n";
+  }
+}
+
+}
+             ?>
       
  <hr>
       <?php
+
        }
        ?>
 
 
+<br><br>
+   
+    <div id="contenu">
+ <div class="Gallery">
 
- 
+      <h2>Mes Albums</h2>
+      
+      <p>Voici les albums que vous avez partagés.
+    
+      <br>
+
+  
+
+     <?php 
+      echo 'Vous avez '.$countalbum.' albums.';
+ if(isset($erreur)) echo '<font color="red">'.$erreur. "</font>";
+?></p>
+  </div>
+ <?php
+
+          while ($album= $reqalbum ->fetch())
+          { 
+        $reqphotoalbum = $bdd ->prepare('SELECT * FROM photos WHERE nomalbum =? ');
+       $reqphotoalbum->execute (array($album['name']));
+    //$photoall= $reqphotoall ->fetch();
+     $countallphotoalbum =  $reqphotoalbum-> rowCount();
+
+
+
+
+            ?>
+<table>
+   <tr>
+      <th>id</th>
+      <th>Album</th>
+      <th>Description</th>
+      <th>Nombre de Photos</th>
+   </tr>
+   
+
+               <tr>
+      <td><?php echo $album['id'];?></td>
+      <td><?php echo $album['name'];?></td>
+      <td><?php echo $album['descri'];?></td>
+      <td><?php echo $countallphotoalbum; ?></td>
+      </tr>
+
+</table>
+        <?php
+
+        while($photoalbum = $reqphotoalbum-> fetch())
+        {
+
+
+
+
+        ?>
+
+
+
+          <div  class="photostyle">
+          <a href="images/User/<?php echo $photoalbum['name']; ?>"  data-lightbox="Vacation"data-title= "<?php echo $photoalbum['descri']; ?>"> 
+         <img src="images/User/<?php echo $photoalbum['name']; ?>" height="200px" /> </a>
+
+          
+         <p>
+         
+         <p id="user"><img src="images/iconuser.png" width="40px" class="user" /><?php echo $userinfo['pseudo']; ?></p>
+         
+          <p id="descri"><img src="images/imgdescri.jpg" width="30px" class="user" /><?php echo $photoalbum['descri']; ?></p> 
+          <p id="lieu"><img src="images/lieu.png" width="30px" class="user" /><?php echo $photoalbum['lieu']; ?></p> 
+           <p id="date"><img src="images/iconhorloge.png" width="20px" class="user" /><?php echo $photoalbum['date']; ?></p> 
+           </p>
+        </div>
+ <hr>
+ <?php
+  }
+  ?>
+
+
+    <?php
+  }
+  ?>
+</div>
+
 
 
       </div>
@@ -389,10 +527,35 @@ html pre
         <div class="inner-wrap">
         <label>Ou avez-vous pris cette photo ?<input type="text" name="lieu" /></label>
     </div>
+            <div class="section"><span>4</span>Visibilité de la photo</div>
+        <div class="inner-wrap">
+        <label> Indiquez si votre photo est public ou privée :</label>
+   
             <input type="checkbox" name="private" >Photo Privée<input type="checkbox" name="public" >Photo Public
-            <br>
+            <br> 
+            <br> 
+            </div>
+
+                    <div class="section"><span>5</span>Album</div>
+
+        <div class="inner-wrap">
+        <label>Dans quel album mettre cette photo ?</label>
+   
+            <select name="selectalbum">
+             <option value="Aucun"selected>Aucun </option>
+                <?php
+                while($albuminfo= $reqalbumbox ->fetch())
+                {
+                  ?>
+              <option value="<?php echo$albuminfo['name'] ?>"selected><?php echo$albuminfo['name'] ?> </option>
+                  
+                  <?php
+                  }
+              ?> </div>
+
+            </select>
           <input type="submit" name="Ajouter" value="Ajouter" />
-          
+          </div>
           </div>
         </div>
       </div>
@@ -401,6 +564,8 @@ html pre
 
 
 <!-- Modif -->
+
+
 
 
 
@@ -432,6 +597,42 @@ html pre
     </div>
 
           <input type="submit" name="Modifier" value="Modifier" />
+          
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+</form>
+
+
+    <div id="popupBoxThreePosition">
+      <div class="popupBoxWrapper">
+        <div class="popupBoxContent">
+
+
+          <div class="ajoutphoto">
+          <form method="POST" action="" >
+        <h1>Création Album <a href="javascript:void(0)" onclick="toggle_visibility('popupBoxThreePosition');"> 
+          <img src="images/fermer.png" width="20px" class="img-thumbnail" /></a></h1>
+ 
+
+
+
+ 
+        <div class="section"><span>1</span>Nom</div>
+        <div class="inner-wrap">
+        <label>Entrez le nom de l'album <input type="text" name="titrealbum" /></label>
+    </div>
+       <div class="section"><span>2</span>Donnez une description à votre album</div>
+        <div class="inner-wrap">
+       <input type="text" name="descrialbum" />
+    </div>
+   
+
+          <input type="submit" name="Creer" value="Créer" />
           
           </div>
         </div>
